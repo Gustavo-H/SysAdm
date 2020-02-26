@@ -9,68 +9,68 @@ using System.Data;
 namespace SysAdm
 {
 
-    class ClsUsuario : ClsCrud
+    class ClsUser : ClsCrud
     {
-        private int mId_Usuario;
-        private string mDs_Prontuario;
-        private string mDs_Senha;
-        private string mNm_Usuario;
-        private string mDt_UltimoLogin;
-        private string mDt_CadastroUsuario;
-        private List<int> mID_Permissoes;
+        private int mID;
+        private string mLogin;
+        private string mPwd;
+        private string mName;
+        private string mDt_LastLogin;
+        private string mDt_Register;
+        private List<int> mPermissions;
 
-        public int ID_Usuario
+        public int ID
         {
-            get { return mId_Usuario; }
-            set { mId_Usuario = value; }
+            get { return mID; }
+            set { mID = value; }
 
         }
-        public string Ds_Prontuario
+        public string Login
         {
-            get { return mDs_Prontuario; }
-            set { mDs_Prontuario = value; }
+            get { return mLogin; }
+            set { mLogin = value; }
         }
-        public string Ds_Senha
+        public string Pwd
         {
-            get { return mDs_Senha; }
-            set { mDs_Senha = value; }
+            get { return mPwd; }
+            set { mPwd = value; }
         }
-        public string Nm_Usuario
+        public string Name
         {
-            get { return mNm_Usuario; }
-            set { mNm_Usuario = value; }
+            get { return mName; }
+            set { mName = value; }
         }
-        public List<int> ID_Permissoes
+        public List<int> Permissions
         {
-            get { return mID_Permissoes; }
-            set { mID_Permissoes = value; }
+            get { return mPermissions; }
+            set { mPermissions = value; }
         }
-        public string Dt_UltimoLogin
+        public string Dt_LastLogin
         {
-            get { return mDt_UltimoLogin; }
-            set { mDt_UltimoLogin = value; }
+            get { return mDt_LastLogin; }
+            set { mDt_LastLogin = value; }
         }
-        public string Dt_CadastroUsuario
+        public string Dt_Register
         {
-            get { return mDt_CadastroUsuario; }
-            set { mDt_CadastroUsuario = value; }
+            get { return mDt_Register; }
+            set { mDt_Register = value; }
         }
 
 
-        public override string Atualizar()
+        public override string Update()       
         {
-            conexao = new ClsConexao();
+            connection = new ClsConnection();
             try
             {
-                SqlCommand cmd = new SqlCommand("sp_Upd_Usuario", conexao.conectar());
+                SqlCommand cmd = new SqlCommand("sp_Upd_Usuario", connection.Connect());
                 cmd.CommandType = CommandType.StoredProcedure;
-                cmd.Parameters.AddWithValue("@pNm_Usuario", Nm_Usuario);
-                cmd.Parameters.AddWithValue("@pDs_Prontuario", Ds_Prontuario);
-                cmd.Parameters.AddWithValue("@pDs_Senha", Ds_Senha);
-                cmd.Parameters.AddWithValue("@pId_Usuario", ID_Usuario);
+                cmd.Parameters.AddWithValue("@pNm_Usuario", Name);
+                cmd.Parameters.AddWithValue("@pDs_Prontuario", Login);
+                cmd.Parameters.AddWithValue("@pDs_Senha", Pwd);
+                cmd.Parameters.AddWithValue("@pId_Usuario", ID);
                 if (cmd.ExecuteNonQuery() > 0)
                 {
-                    return InserirPermissoesUsuario(ID_Usuario, ID_Permissoes);
+                    return InsertUserPermissions(ID, Permissions);
                 }
                 else
                 {
@@ -83,28 +83,28 @@ namespace SysAdm
             }
             finally
             {
-                conexao.desconectar();
+                connection.Disconnect();
             }
         }
-        public override string Consultar()
+        public override string Query()       
         {
-            conexao = new ClsConexao();
+            connection = new ClsConnection();
             try
             {
 
-                SqlCommand cmd = new SqlCommand("sp_Sel_Usuario", conexao.conectar());
+                SqlCommand cmd = new SqlCommand("sp_Sel_Usuario", connection.Connect());
                 cmd.CommandType = CommandType.StoredProcedure;
-                cmd.Parameters.AddWithValue("@pId_Usuario", ID_Usuario);
+                cmd.Parameters.AddWithValue("@pId_Usuario", ID);
                 SqlDataReader dr = cmd.ExecuteReader(CommandBehavior.SingleRow);
 
                 dr.Read();
 
-                Nm_Usuario = dr["Nome"].ToString();
-                Ds_Prontuario = dr["Login"].ToString();
-                Ds_Senha = dr["Senha"].ToString();
-                Dt_CadastroUsuario = dr["DataCadastro"].ToString();
-                Dt_UltimoLogin = dr["UltimoLogin"].ToString();
-                ID_Permissoes = GetPermissoesUsuario(ID_Usuario);
+                Name = dr["Nome"].ToString();
+                Login = dr["Login"].ToString();
+                Pwd = dr["Senha"].ToString();
+                Dt_Register = dr["DataCadastro"].ToString();
+                Dt_LastLogin = dr["UltimoLogin"].ToString();
+                Permissions = GetUserPermissions(ID);
                 return "OK";
             }
             catch (Exception ex)
@@ -113,18 +113,18 @@ namespace SysAdm
             }
             finally
             {
-                conexao.desconectar();
+                connection.Disconnect();
             }
         }
-        public override string Excluir()
+        public override string Delete()
         {
-            conexao = new ClsConexao();
+            connection = new ClsConnection();
             try
             {
 
-                SqlCommand cmd = new SqlCommand("sp_Del_Usuario", conexao.conectar());
+                SqlCommand cmd = new SqlCommand("sp_Del_Usuario", connection.Connect());
                 cmd.CommandType = CommandType.StoredProcedure;
-                cmd.Parameters.AddWithValue("@pId_Usuario", ID_Usuario);
+                cmd.Parameters.AddWithValue("@pId_Usuario", ID);
 
                 if (cmd.ExecuteNonQuery() > 0)
                     return "OK";
@@ -137,21 +137,21 @@ namespace SysAdm
             }
             finally
             {
-                conexao.desconectar();
+                connection.Disconnect();
             }
         }
         public override string Grid()
         {
             string resultado = string.Empty;
 
-            conexao = new ClsConexao();
+            connection = new ClsConnection();
             try
             {
 
-                SqlCommand cmd = new SqlCommand("sp_Grid_Usuario", conexao.conectar());
+                SqlCommand cmd = new SqlCommand("sp_Grid_Usuario", connection.Connect());
                 cmd.CommandType = CommandType.StoredProcedure;
-                cmd.Parameters.AddWithValue("@pNm_Usuario", Nm_Usuario);
-                cmd.Parameters.AddWithValue("@pDs_Prontuario", Ds_Prontuario);
+                cmd.Parameters.AddWithValue("@pNm_Usuario", Name);
+                cmd.Parameters.AddWithValue("@pDs_Prontuario", Login);
                 SqlDataAdapter da = new SqlDataAdapter(cmd);
                 Ds = new DataSet();
                 da.Fill(Ds);
@@ -163,23 +163,23 @@ namespace SysAdm
             }
             finally
             {
-                conexao.desconectar();
+                connection.Disconnect();
             }
         }
-        public override string Inserir()
+        public override string Insert()
         {
-            conexao = new ClsConexao();
+            connection = new ClsConnection();
             try
             {
 
-                SqlCommand cmd = new SqlCommand("sp_Ins_Usuario", conexao.conectar());
+                SqlCommand cmd = new SqlCommand("sp_Ins_Usuario", connection.Connect());
                 cmd.CommandType = CommandType.StoredProcedure;
-                cmd.Parameters.AddWithValue("@pNm_Usuario", Nm_Usuario);
-                cmd.Parameters.AddWithValue("@pDs_Prontuario", Ds_Prontuario);
-                cmd.Parameters.AddWithValue("@pDs_Senha", Ds_Senha);
+                cmd.Parameters.AddWithValue("@pNm_Usuario", Name);
+                cmd.Parameters.AddWithValue("@pDs_Prontuario", Login);
+                cmd.Parameters.AddWithValue("@pDs_Senha", Pwd);
                 SqlDataReader dr = cmd.ExecuteReader();
                 if (dr.Read())
-                    return InserirPermissoesUsuario(int.Parse(dr["ID"].ToString()), ID_Permissoes);
+                    return InsertUserPermissions(int.Parse(dr["ID"].ToString()), Permissions);
                 else
                     return "Falha no banco de dados ao tenatr inserir funcionario/nA função ExecuteNomQuery Retornou 0 linhas afetadas quando o valor deveria ser igual ou mair que 1";
             }
@@ -189,43 +189,43 @@ namespace SysAdm
             }
             finally
             {
-                conexao.desconectar();
+                connection.Disconnect();
             }
         }
 
-        public static List<int> GetPermissoesUsuario(int id)
+        public static List<int> GetUserPermissions(int id)
         {
-            ClsConexao conexao = new ClsConexao();
-            List<int> permissoes = new List<int>();
+            ClsConnection connection = new ClsConnection();
+            List<int> permissions = new List<int>();
 
             try
             {
-                SqlCommand cmd = new SqlCommand("sp_Sel_PermissoesUsuario", conexao.conectar());
+                SqlCommand cmd = new SqlCommand("sp_Sel_PermissoesUsuario", connection.Connect());
                 cmd.CommandType = CommandType.StoredProcedure;
                 cmd.Parameters.AddWithValue("@pID_Usuario", id);
                 SqlDataReader dr = cmd.ExecuteReader();
 
                 while (dr.Read())
                 {
-                    permissoes.Add(int.Parse(dr["ID"].ToString()));
+                    permissions.Add(int.Parse(dr["ID"].ToString()));
                 }
-                conexao.desconectar();
-                return (permissoes);
+                connection.Disconnect();
+                return (permissions);
             }
             catch
             {
-                conexao.desconectar();
+                connection.Disconnect();
                 return (null);
             }
         }
-        public static bool ValidarProntuario(string prontuario)
+        public static bool CheckLogin(string login)
         {
-            ClsConexao conexao = new ClsConexao();
+            ClsConnection connection = new ClsConnection();
             try
             {
-                SqlCommand cmd = new SqlCommand("sp_ValidarProntuario", conexao.conectar());
+                SqlCommand cmd = new SqlCommand("sp_ValidarProntuario", connection.Connect());
                 cmd.CommandType = CommandType.StoredProcedure;
-                cmd.Parameters.AddWithValue("@pDs_Prontuario", prontuario);
+                cmd.Parameters.AddWithValue("@pDs_Prontuario", login);
                 SqlDataReader dr = cmd.ExecuteReader();
                 if (dr.HasRows)
                     return false;
@@ -237,13 +237,13 @@ namespace SysAdm
                 return false;
             }
         }
-
-        private string InserirPermissoesUsuario(int id, List<int> permissoes)
+        private string InsertUserPermissions(int id, List<int> permissoes)
         {
-            conexao = new ClsConexao();
+            connection = new ClsConnection();
             SqlTransaction transaction;
-            conexao.conectar();
-            transaction = conexao.conexao.BeginTransaction("transPermissao");
+            connection.Connect();
+
+            transaction = connection.Connect().BeginTransaction("transactionPermissions");
 
             try
             {
@@ -254,18 +254,18 @@ namespace SysAdm
 
                 cmd.ExecuteNonQuery();
 
-                for (int i = 0; i < ID_Permissoes.Count; i++)
+                for (int i = 0; i < Permissions.Count; i++)
                 {
                     cmd = new SqlCommand("sp_Ins_PermissoesUsuario", transaction.Connection);
                     cmd.CommandType = CommandType.StoredProcedure;
                     cmd.Transaction = transaction;
                     cmd.Parameters.AddWithValue("@pID_Usuario", id);
-                    cmd.Parameters.AddWithValue("@pID_Funcionalidade", ID_Permissoes[i]);
+                    cmd.Parameters.AddWithValue("@pID_Funcionalidade", Permissions[i]);
                     cmd.ExecuteNonQuery();
                 }
 
                 transaction.Commit();
-                conexao.desconectar();
+                connection.Disconnect();
                 return ("OK");
             }
             catch (Exception ex)
@@ -283,15 +283,15 @@ namespace SysAdm
         }
         public string GetFuncionalidades()
         {
-            conexao = new ClsConexao();
+            connection = new ClsConnection();
             try
             {
-                SqlCommand cmd = new SqlCommand("sp_Sel_Funcionalidades", conexao.conectar());
+                SqlCommand cmd = new SqlCommand("sp_Sel_Funcionalidades", connection.Connect());
                 cmd.CommandType = CommandType.StoredProcedure;
                 SqlDataAdapter da = new SqlDataAdapter(cmd);
                 Ds = new DataSet();
                 da.Fill(Ds);
-                conexao.desconectar();
+                connection.Disconnect();
                 return "OK";
             }
             catch (Exception ex)
@@ -300,7 +300,7 @@ namespace SysAdm
             }
             finally
             {
-                conexao.desconectar();
+                connection.Disconnect();
             }
         }
     }

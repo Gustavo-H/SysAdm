@@ -62,10 +62,10 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="ClsConexao.cs" />
+    <Compile Include="ClsConnection.cs" />
     <Compile Include="ClsCrud.cs" />
     <Compile Include="ClsLogin.cs" />
-    <Compile Include="ClsUsuario.cs" />
+    <Compile Include="ClsUser.cs" />
     <Compile Include="DatabaseDataSet.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>

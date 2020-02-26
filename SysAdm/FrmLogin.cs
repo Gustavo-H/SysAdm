@@ -32,10 +32,10 @@ namespace SysAdm
             await Task.Delay(100);
             login = new ClsLogin();
 
-            login.Ds_Senha = txtSenha.Text;
-            login.Ds_Prontuario = txtLogin.Text;
+            login.Pwd = txtSenha.Text;
+            login.Login = txtLogin.Text;
 
-            string resultado = login.ValidarLogin();
+            string resultado = login.LoginValidation();
 
             if (resultado.Length > 5)
             {
@@ -150,7 +150,6 @@ namespace SysAdm
             toolTip1.SetToolTip(this.btnInfo, "Clique Para Obter\nAjuda ou Informações");
             toolTip1.SetToolTip(this.txtLogin, "Digite Seu Prontuario Aqui");
             toolTip1.SetToolTip(this.txtSenha, "Digite Sua Senha Aqui");
-
         }
 
         private void btnSair_Click(object sender, EventArgs e)

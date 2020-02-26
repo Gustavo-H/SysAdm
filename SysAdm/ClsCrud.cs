@@ -10,18 +10,17 @@ namespace SysAdm
 {
     public abstract class ClsCrud
     {
-        public ClsConexao conexao;
-        // public int conexao;
+        public ClsConnection connection;
         public DataSet Ds;
         public DataTable Dt;
 
-        abstract public string Inserir();
-        abstract public string Atualizar();
-        abstract public string Consultar();
+        abstract public string Insert();
+        abstract public string Update();
+        abstract public string Query();
         abstract public string Grid();
-        abstract public string Excluir();
+        abstract public string Delete();
 
-        public void InserirLog()
+        public void InsertLog()
         {
 
         }

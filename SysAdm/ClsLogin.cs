@@ -10,77 +10,77 @@ namespace SysAdm
 {
     class ClsLogin
     {
-        public static ClsLogin UserLogado;
-        ClsConexao conexao = new ClsConexao();
+        public static ClsLogin UserLogged;
+        ClsConnection connection = new ClsConnection();
 
-        private int mId_Usuario;
-        private string mDs_Prontuario;
-        private string mDs_Senha;
-        private string mNm_Usuario;
-        private string mDt_UltimoLogin;
-        private string mDt_CadastroUsuario;
-        private List<int> mID_Permissoes;
+        private int mID;
+        private string mLogin;
+        private string mPwd;
+        private string mName;
+        private string mDt_LastLogin;
+        private string mDt_Register;
+        private List<int> mPermissions;
 
-        public int ID_Usuario
+        public int ID
         {
-            get { return mId_Usuario; }
-            set { mId_Usuario = value; }
+            get { return mID; }
+            set { mID = value; }
         }
-        public string Ds_Prontuario
+        public string Login
         {
-            get { return mDs_Prontuario; }
-            set { mDs_Prontuario = value; }
+            get { return mLogin; }
+            set { mLogin = value; }
         }
-        public string Ds_Senha
+        public string Pwd
         {
-            get { return mDs_Senha; }
-            set { mDs_Senha = value; }
+            get { return mPwd; }
+            set { mPwd = value; }
         }
-        public string Nm_Usuario
+        public string Name
         {
-            get { return mNm_Usuario; }
-            set { mNm_Usuario = value; }
+            get { return mName; }
+            set { mName = value; }
         }
-        public List<int> ID_Permissoes
+        public List<int> Permissions
         {
-            get { return mID_Permissoes; }
-            set { mID_Permissoes = value; }
+            get { return mPermissions; }
+            set { mPermissions = value; }
         }
-        public string Dt_UltimoLogin
+        public string Dt_LastLogin
         {
-            get { return mDt_UltimoLogin; }
-            set { mDt_UltimoLogin = value; }
+            get { return mDt_LastLogin; }
+            set { mDt_LastLogin = value; }
         }
-        public string Dt_CadastroUsuario
+        public string Dt_Register
         {
-            get { return mDt_CadastroUsuario; }
-            set { mDt_CadastroUsuario = value; }
+            get { return mDt_Register; }
+            set { mDt_Register = value; }
         }
 
 
 
-        public string ValidarLogin()
+        public string LoginValidation()
         {
             try
             {
-                SqlCommand cmd = new SqlCommand("sp_ValidarLogin", conexao.conectar())
+                SqlCommand cmd = new SqlCommand("sp_ValidarLogin", connection.Connect())
                 {
                     CommandType = CommandType.StoredProcedure
                 };
-                cmd.Parameters.AddWithValue("@pLogin", Ds_Prontuario);
-                cmd.Parameters.AddWithValue("@pSenha", Ds_Senha);
+                cmd.Parameters.AddWithValue("@pLogin", Login);
+                cmd.Parameters.AddWithValue("@pSenha", Pwd);
                 SqlDataReader dr = cmd.ExecuteReader(CommandBehavior.SingleRow);
 
                 if (dr.Read())
                 {
-                    UserLogado = new ClsLogin();
-                    UserLogado.ID_Usuario = int.Parse(dr["ID"].ToString());
-                    UserLogado.Nm_Usuario = dr["Nome"].ToString();
-                    UserLogado.Ds_Prontuario = Ds_Prontuario;
-                    UserLogado.Dt_CadastroUsuario = dr["DataCadastro"].ToString();
-                    UserLogado.Dt_UltimoLogin = dr["UltimoLogin"].ToString();
-                    UserLogado.ID_Permissoes = ClsUsuario.GetPermissoesUsuario(UserLogado.ID_Usuario);
-                    setDataLogin();
+                    UserLogged = new ClsLogin();
+                    UserLogged.ID = int.Parse(dr["ID"].ToString());
+                    UserLogged.Name = dr["Nome"].ToString();
+                    UserLogged.Login = Login;
+                    UserLogged.Dt_Register = dr["DataCadastro"].ToString();
+                    UserLogged.mDt_LastLogin = dr["UltimoLogin"].ToString();
+                    UserLogged.Permissions = ClsUser.GetUserPermissions(UserLogged.ID);
+                    SetLoginDate();
                     return "true";
                 }
                 else
@@ -91,16 +91,16 @@ namespace SysAdm
                 return ex.ToString();
             }
         }
-        private void setDataLogin()
+        private void SetLoginDate()
         {
             try
             {
 
-                SqlCommand cmd = new SqlCommand("sp_Set_DataLogin", conexao.conectar());
+                SqlCommand cmd = new SqlCommand("sp_Set_DataLogin", connection.Connect());
                 cmd.CommandType = CommandType.StoredProcedure;
-                cmd.Parameters.AddWithValue("@pId_Usuario", UserLogado.ID_Usuario);
+                cmd.Parameters.AddWithValue("@pId_Usuario", UserLogged.ID);
                 cmd.ExecuteNonQuery();
-                conexao.desconectar();
+                connection.Disconnect();
             }
             catch
             {
