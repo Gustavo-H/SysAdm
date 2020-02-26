@@ -14,9 +14,9 @@ namespace SysAdm
     {
         public FrmLogin()
         {
+            InitializeComponent();
             this.MouseDown += new MouseEventHandler(MouseDownFrm);
             this.MouseMove += new MouseEventHandler(MouseMoveFrm);
-
             txtLogin.Text = txtSenha.Text = "admin";
         }
 
@@ -56,9 +56,10 @@ namespace SysAdm
             lblSuperior.BackColor = Color.ForestGreen;
             menssagem(Color.SeaGreen, "Login Feito Com Sucesso");
             await Task.Delay(100);
-            //FrmPrincipal frmPrincipal = new FrmPrincipal();
+            FrmMain frmMain = new FrmMain();
+            FrmMain main = frmMain;
             this.Hide();
-            //frmPrincipal.ShowDialog();
+            main.ShowDialog();
             btnIr.Enabled = true;
 
             this.Show();

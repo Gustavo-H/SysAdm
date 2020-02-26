@@ -7,3 +7,9 @@ C:\Projects\SysAdm\SysAdm\obj\Debug\SysAdm.Properties.Resources.resources
 C:\Projects\SysAdm\SysAdm\obj\Debug\SysAdm.csproj.GenerateResource.cache
 C:\Projects\SysAdm\SysAdm\obj\Debug\SysAdm.exe
 C:\Projects\SysAdm\SysAdm\obj\Debug\SysAdm.pdb
+C:\Projects\SysAdm\SysAdm\bin\Debug\Database.mdf
+C:\Projects\SysAdm\SysAdm\bin\Debug\Database_log.ldf
+C:\Projects\SysAdm\SysAdm\bin\Debug\Bunifu_UI_v1.52.dll
+C:\Projects\SysAdm\SysAdm\obj\Debug\SysAdm.FrmLogin.resources
+C:\Projects\SysAdm\SysAdm\obj\Debug\SysAdm.csproj.CopyComplete
+C:\Projects\SysAdm\SysAdm\obj\Debug\SysAdm.FrmMain.resources
