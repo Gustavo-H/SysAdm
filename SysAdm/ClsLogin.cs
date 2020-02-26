@@ -13,7 +13,6 @@ namespace SysAdm
         public static ClsLogin UserLogado;
         ClsConexao conexao = new ClsConexao();
 
-
         private int mId_Usuario;
         private string mDs_Prontuario;
         private string mDs_Senha;
