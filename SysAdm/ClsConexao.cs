@@ -7,7 +7,7 @@ using System.Data.SqlClient;
 
 namespace SysAdm
 {
-    class ClsConexao
+    public class ClsConexao
     {
         public SqlConnection conexao = new SqlConnection();
 

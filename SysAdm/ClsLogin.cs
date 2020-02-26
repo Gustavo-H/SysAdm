@@ -78,7 +78,7 @@ namespace SysAdm
                     UserLogado.Ds_Prontuario = Ds_Prontuario;
                     UserLogado.Dt_CadastroUsuario = dr["DataCadastro"].ToString();
                     UserLogado.Dt_UltimoLogin = dr["UltimoLogin"].ToString();
-                    UserLogado.ID_Permissoes = ClsUsuario.getPermissoesUsuario(UserLogado.ID_Usuario);
+                    UserLogado.ID_Permissoes = ClsUsuario.GetPermissoesUsuario(UserLogado.ID_Usuario);
                     setDataLogin();
                     return "true";
                 }
