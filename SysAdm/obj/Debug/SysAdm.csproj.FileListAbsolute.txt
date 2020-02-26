@@ -1,1 +1,9 @@
 C:\Users\GustavoHenriquePinhe\Desktop\SysAdm\SysAdm\bin\Debug\SysAdm.exe.config
+C:\Projects\SysAdm\SysAdm\bin\Debug\SysAdm.exe.config
+C:\Projects\SysAdm\SysAdm\bin\Debug\SysAdm.exe
+C:\Projects\SysAdm\SysAdm\bin\Debug\SysAdm.pdb
+C:\Projects\SysAdm\SysAdm\obj\Debug\SysAdm.csprojAssemblyReference.cache
+C:\Projects\SysAdm\SysAdm\obj\Debug\SysAdm.Properties.Resources.resources
+C:\Projects\SysAdm\SysAdm\obj\Debug\SysAdm.csproj.GenerateResource.cache
+C:\Projects\SysAdm\SysAdm\obj\Debug\SysAdm.exe
+C:\Projects\SysAdm\SysAdm\obj\Debug\SysAdm.pdb
