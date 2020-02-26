@@ -60,12 +60,14 @@ namespace SysAdm
 
 
 
-        public string validarLogin()
+        public string ValidarLogin()
         {
             try
             {
-                SqlCommand cmd = new SqlCommand("sp_ValidarLogin", conexao.conectar());
-                cmd.CommandType = CommandType.StoredProcedure;
+                SqlCommand cmd = new SqlCommand("sp_ValidarLogin", conexao.conectar())
+                {
+                    CommandType = CommandType.StoredProcedure
+                };
                 cmd.Parameters.AddWithValue("@pLogin", Ds_Prontuario);
                 cmd.Parameters.AddWithValue("@pSenha", Ds_Senha);
                 SqlDataReader dr = cmd.ExecuteReader(CommandBehavior.SingleRow);
