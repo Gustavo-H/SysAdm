@@ -32,16 +32,16 @@
             this.IMG_RED = new System.Windows.Forms.PictureBox();
             this.pictureBox2 = new System.Windows.Forms.PictureBox();
             this.btnInfo = new System.Windows.Forms.PictureBox();
-            this.btnIr = new System.Windows.Forms.Button();
-            this.imgMostrarSenha = new System.Windows.Forms.PictureBox();
-            this.imgNaoMostarSenha = new System.Windows.Forms.PictureBox();
+            this.btnGo = new System.Windows.Forms.Button();
+            this.imgShowPwd = new System.Windows.Forms.PictureBox();
+            this.imgHidePwd = new System.Windows.Forms.PictureBox();
             this.txtLogin = new ns1.BunifuMetroTextbox();
-            this.txtSenha = new ns1.BunifuMetroTextbox();
+            this.txtPwd = new ns1.BunifuMetroTextbox();
             this.label3 = new System.Windows.Forms.Label();
-            this.lblSuperior = new System.Windows.Forms.Label();
+            this.lblTop = new System.Windows.Forms.Label();
             this.panel3 = new System.Windows.Forms.Panel();
-            this.btnSair = new System.Windows.Forms.PictureBox();
-            this.lblMenssage = new System.Windows.Forms.Label();
+            this.btnClose = new System.Windows.Forms.PictureBox();
+            this.lblMessage = new System.Windows.Forms.Label();
             this.panel2 = new System.Windows.Forms.Panel();
             this.panel1 = new System.Windows.Forms.Panel();
             this.label1 = new System.Windows.Forms.Label();
@@ -50,9 +50,9 @@
             ((System.ComponentModel.ISupportInitialize)(this.IMG_RED)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.btnInfo)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.imgMostrarSenha)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.imgNaoMostarSenha)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.btnSair)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.imgShowPwd)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.imgHidePwd)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.btnClose)).BeginInit();
             this.panel4.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -76,6 +76,8 @@
             this.pictureBox2.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
             this.pictureBox2.TabIndex = 108;
             this.pictureBox2.TabStop = false;
+            this.pictureBox2.MouseDown += new System.Windows.Forms.MouseEventHandler(this.MouseDownFrm);
+            this.pictureBox2.MouseMove += new System.Windows.Forms.MouseEventHandler(this.MouseMoveFrm);
             // 
             // btnInfo
             // 
@@ -87,44 +89,47 @@
             this.btnInfo.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
             this.btnInfo.TabIndex = 107;
             this.btnInfo.TabStop = false;
+            this.btnInfo.Click += new System.EventHandler(this.BtnInfo_Click);
             // 
-            // btnIr
+            // btnGo
             // 
-            this.btnIr.BackColor = System.Drawing.Color.Transparent;
-            this.btnIr.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("btnIr.BackgroundImage")));
-            this.btnIr.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
-            this.btnIr.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
-            this.btnIr.FlatAppearance.BorderSize = 0;
-            this.btnIr.Location = new System.Drawing.Point(450, 270);
-            this.btnIr.Margin = new System.Windows.Forms.Padding(0);
-            this.btnIr.Name = "btnIr";
-            this.btnIr.Size = new System.Drawing.Size(50, 44);
-            this.btnIr.TabIndex = 96;
-            this.btnIr.UseVisualStyleBackColor = true;
-            this.btnIr.Click += new System.EventHandler(this.btnIr_Click);
+            this.btnGo.BackColor = System.Drawing.Color.Transparent;
+            this.btnGo.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("btnGo.BackgroundImage")));
+            this.btnGo.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+            this.btnGo.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
+            this.btnGo.FlatAppearance.BorderSize = 0;
+            this.btnGo.Location = new System.Drawing.Point(450, 270);
+            this.btnGo.Margin = new System.Windows.Forms.Padding(0);
+            this.btnGo.Name = "btnGo";
+            this.btnGo.Size = new System.Drawing.Size(50, 44);
+            this.btnGo.TabIndex = 96;
+            this.btnGo.UseVisualStyleBackColor = true;
+            this.btnGo.Click += new System.EventHandler(this.BtnGo_Click);
             // 
-            // imgMostrarSenha
+            // imgShowPwd
             // 
-            this.imgMostrarSenha.BackColor = System.Drawing.Color.Silver;
-            this.imgMostrarSenha.Image = ((System.Drawing.Image)(resources.GetObject("imgMostrarSenha.Image")));
-            this.imgMostrarSenha.Location = new System.Drawing.Point(399, 342);
-            this.imgMostrarSenha.Name = "imgMostrarSenha";
-            this.imgMostrarSenha.Size = new System.Drawing.Size(43, 35);
-            this.imgMostrarSenha.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
-            this.imgMostrarSenha.TabIndex = 106;
-            this.imgMostrarSenha.TabStop = false;
+            this.imgShowPwd.BackColor = System.Drawing.Color.Silver;
+            this.imgShowPwd.Image = ((System.Drawing.Image)(resources.GetObject("imgShowPwd.Image")));
+            this.imgShowPwd.Location = new System.Drawing.Point(399, 342);
+            this.imgShowPwd.Name = "imgShowPwd";
+            this.imgShowPwd.Size = new System.Drawing.Size(43, 35);
+            this.imgShowPwd.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+            this.imgShowPwd.TabIndex = 106;
+            this.imgShowPwd.TabStop = false;
+            this.imgShowPwd.Click += new System.EventHandler(this.ImgShowPwd_Click);
             // 
-            // imgNaoMostarSenha
+            // imgHidePwd
             // 
-            this.imgNaoMostarSenha.BackColor = System.Drawing.Color.Silver;
-            this.imgNaoMostarSenha.Image = ((System.Drawing.Image)(resources.GetObject("imgNaoMostarSenha.Image")));
-            this.imgNaoMostarSenha.Location = new System.Drawing.Point(399, 342);
-            this.imgNaoMostarSenha.Name = "imgNaoMostarSenha";
-            this.imgNaoMostarSenha.Size = new System.Drawing.Size(43, 35);
-            this.imgNaoMostarSenha.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
-            this.imgNaoMostarSenha.TabIndex = 105;
-            this.imgNaoMostarSenha.TabStop = false;
-            this.imgNaoMostarSenha.Visible = false;
+            this.imgHidePwd.BackColor = System.Drawing.Color.Silver;
+            this.imgHidePwd.Image = ((System.Drawing.Image)(resources.GetObject("imgHidePwd.Image")));
+            this.imgHidePwd.Location = new System.Drawing.Point(399, 342);
+            this.imgHidePwd.Name = "imgHidePwd";
+            this.imgHidePwd.Size = new System.Drawing.Size(43, 35);
+            this.imgHidePwd.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+            this.imgHidePwd.TabIndex = 105;
+            this.imgHidePwd.TabStop = false;
+            this.imgHidePwd.Visible = false;
+            this.imgHidePwd.Click += new System.EventHandler(this.ImgHidePwd_Click);
             // 
             // txtLogin
             // 
@@ -144,23 +149,23 @@
             this.txtLogin.TabIndex = 94;
             this.txtLogin.TextAlign = System.Windows.Forms.HorizontalAlignment.Left;
             // 
-            // txtSenha
+            // txtPwd
             // 
-            this.txtSenha.BackColor = System.Drawing.Color.Silver;
-            this.txtSenha.BorderColorFocused = System.Drawing.Color.Blue;
-            this.txtSenha.BorderColorIdle = System.Drawing.Color.SeaGreen;
-            this.txtSenha.BorderColorMouseHover = System.Drawing.Color.LimeGreen;
-            this.txtSenha.BorderThickness = 3;
-            this.txtSenha.Cursor = System.Windows.Forms.Cursors.IBeam;
-            this.txtSenha.Font = new System.Drawing.Font("Century Gothic", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtSenha.ForeColor = System.Drawing.Color.SeaGreen;
-            this.txtSenha.isPassword = true;
-            this.txtSenha.Location = new System.Drawing.Point(160, 337);
-            this.txtSenha.Margin = new System.Windows.Forms.Padding(4);
-            this.txtSenha.Name = "txtSenha";
-            this.txtSenha.Size = new System.Drawing.Size(286, 44);
-            this.txtSenha.TabIndex = 95;
-            this.txtSenha.TextAlign = System.Windows.Forms.HorizontalAlignment.Left;
+            this.txtPwd.BackColor = System.Drawing.Color.Silver;
+            this.txtPwd.BorderColorFocused = System.Drawing.Color.Blue;
+            this.txtPwd.BorderColorIdle = System.Drawing.Color.SeaGreen;
+            this.txtPwd.BorderColorMouseHover = System.Drawing.Color.LimeGreen;
+            this.txtPwd.BorderThickness = 3;
+            this.txtPwd.Cursor = System.Windows.Forms.Cursors.IBeam;
+            this.txtPwd.Font = new System.Drawing.Font("Century Gothic", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txtPwd.ForeColor = System.Drawing.Color.SeaGreen;
+            this.txtPwd.isPassword = true;
+            this.txtPwd.Location = new System.Drawing.Point(160, 337);
+            this.txtPwd.Margin = new System.Windows.Forms.Padding(4);
+            this.txtPwd.Name = "txtPwd";
+            this.txtPwd.Size = new System.Drawing.Size(286, 44);
+            this.txtPwd.TabIndex = 95;
+            this.txtPwd.TextAlign = System.Windows.Forms.HorizontalAlignment.Left;
             // 
             // label3
             // 
@@ -168,22 +173,22 @@
             this.label3.BackColor = System.Drawing.Color.Transparent;
             this.label3.Font = new System.Drawing.Font("Microsoft Sans Serif", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label3.ForeColor = System.Drawing.Color.SeaGreen;
-            this.label3.Location = new System.Drawing.Point(70, 345);
+            this.label3.Location = new System.Drawing.Point(67, 342);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(86, 25);
             this.label3.TabIndex = 104;
             this.label3.Text = "Senha :";
             // 
-            // lblSuperior
+            // lblTop
             // 
-            this.lblSuperior.AutoSize = true;
-            this.lblSuperior.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
-            this.lblSuperior.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblSuperior.Location = new System.Drawing.Point(-7, 0);
-            this.lblSuperior.Name = "lblSuperior";
-            this.lblSuperior.Size = new System.Drawing.Size(640, 18);
-            this.lblSuperior.TabIndex = 103;
-            this.lblSuperior.Text = "                                                                                 " +
+            this.lblTop.AutoSize = true;
+            this.lblTop.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
+            this.lblTop.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblTop.Location = new System.Drawing.Point(-7, 0);
+            this.lblTop.Name = "lblTop";
+            this.lblTop.Size = new System.Drawing.Size(640, 18);
+            this.lblTop.TabIndex = 103;
+            this.lblTop.Text = "                                                                                 " +
     "                                                                             ";
             // 
             // panel3
@@ -194,28 +199,31 @@
             this.panel3.Size = new System.Drawing.Size(17, 442);
             this.panel3.TabIndex = 102;
             // 
-            // btnSair
+            // btnClose
             // 
-            this.btnSair.Image = ((System.Drawing.Image)(resources.GetObject("btnSair.Image")));
-            this.btnSair.Location = new System.Drawing.Point(581, 17);
-            this.btnSair.Margin = new System.Windows.Forms.Padding(2);
-            this.btnSair.Name = "btnSair";
-            this.btnSair.Size = new System.Drawing.Size(33, 33);
-            this.btnSair.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
-            this.btnSair.TabIndex = 101;
-            this.btnSair.TabStop = false;
+            this.btnClose.Image = ((System.Drawing.Image)(resources.GetObject("btnClose.Image")));
+            this.btnClose.Location = new System.Drawing.Point(581, 17);
+            this.btnClose.Margin = new System.Windows.Forms.Padding(2);
+            this.btnClose.Name = "btnClose";
+            this.btnClose.Size = new System.Drawing.Size(33, 33);
+            this.btnClose.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+            this.btnClose.TabIndex = 101;
+            this.btnClose.TabStop = false;
+            this.btnClose.Click += new System.EventHandler(this.BtnClose_Click);
+            this.btnClose.MouseEnter += new System.EventHandler(this.BtnClose_MouseEnter);
+            this.btnClose.MouseLeave += new System.EventHandler(this.BtnClose_MouseLeave);
             // 
-            // lblMenssage
+            // lblMessage
             // 
-            this.lblMenssage.AutoSize = true;
-            this.lblMenssage.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblMenssage.ForeColor = System.Drawing.Color.SeaGreen;
-            this.lblMenssage.Location = new System.Drawing.Point(162, 231);
-            this.lblMenssage.Name = "lblMenssage";
-            this.lblMenssage.Size = new System.Drawing.Size(179, 20);
-            this.lblMenssage.TabIndex = 100;
-            this.lblMenssage.Text = "Menssagem Ao Usuario";
-            this.lblMenssage.Visible = false;
+            this.lblMessage.AutoSize = true;
+            this.lblMessage.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblMessage.ForeColor = System.Drawing.Color.SeaGreen;
+            this.lblMessage.Location = new System.Drawing.Point(162, 231);
+            this.lblMessage.Name = "lblMessage";
+            this.lblMessage.Size = new System.Drawing.Size(179, 20);
+            this.lblMessage.TabIndex = 100;
+            this.lblMessage.Text = "Menssagem Ao Usuario";
+            this.lblMessage.Visible = false;
             // 
             // panel2
             // 
@@ -239,11 +247,11 @@
             this.label1.BackColor = System.Drawing.Color.Transparent;
             this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label1.ForeColor = System.Drawing.Color.SeaGreen;
-            this.label1.Location = new System.Drawing.Point(33, 277);
+            this.label1.Location = new System.Drawing.Point(76, 277);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(123, 25);
+            this.label1.Size = new System.Drawing.Size(77, 25);
             this.label1.TabIndex = 97;
-            this.label1.Text = "Prontuario :";
+            this.label1.Text = "Login :";
             // 
             // panel4
             // 
@@ -253,6 +261,8 @@
             this.panel4.Name = "panel4";
             this.panel4.Size = new System.Drawing.Size(425, 163);
             this.panel4.TabIndex = 110;
+            this.panel4.MouseDown += new System.Windows.Forms.MouseEventHandler(this.MouseDownFrm);
+            this.panel4.MouseMove += new System.Windows.Forms.MouseEventHandler(this.MouseMoveFrm);
             // 
             // label2
             // 
@@ -267,6 +277,7 @@
             // 
             // FrmLogin
             // 
+            this.AcceptButton = this.btnGo;
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(631, 441);
@@ -274,16 +285,16 @@
             this.Controls.Add(this.IMG_RED);
             this.Controls.Add(this.pictureBox2);
             this.Controls.Add(this.btnInfo);
-            this.Controls.Add(this.btnIr);
-            this.Controls.Add(this.imgMostrarSenha);
-            this.Controls.Add(this.imgNaoMostarSenha);
+            this.Controls.Add(this.btnGo);
+            this.Controls.Add(this.imgShowPwd);
+            this.Controls.Add(this.imgHidePwd);
             this.Controls.Add(this.txtLogin);
-            this.Controls.Add(this.txtSenha);
+            this.Controls.Add(this.txtPwd);
             this.Controls.Add(this.label3);
-            this.Controls.Add(this.lblSuperior);
+            this.Controls.Add(this.lblTop);
             this.Controls.Add(this.panel3);
-            this.Controls.Add(this.btnSair);
-            this.Controls.Add(this.lblMenssage);
+            this.Controls.Add(this.btnClose);
+            this.Controls.Add(this.lblMessage);
             this.Controls.Add(this.panel2);
             this.Controls.Add(this.panel1);
             this.Controls.Add(this.label1);
@@ -294,9 +305,9 @@
             ((System.ComponentModel.ISupportInitialize)(this.IMG_RED)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.btnInfo)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.imgMostrarSenha)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.imgNaoMostarSenha)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.btnSair)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.imgShowPwd)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.imgHidePwd)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.btnClose)).EndInit();
             this.panel4.ResumeLayout(false);
             this.panel4.PerformLayout();
             this.ResumeLayout(false);
@@ -309,16 +320,16 @@
         private System.Windows.Forms.PictureBox IMG_RED;
         private System.Windows.Forms.PictureBox pictureBox2;
         private System.Windows.Forms.PictureBox btnInfo;
-        private System.Windows.Forms.Button btnIr;
-        private System.Windows.Forms.PictureBox imgMostrarSenha;
-        private System.Windows.Forms.PictureBox imgNaoMostarSenha;
+        private System.Windows.Forms.Button btnGo;
+        private System.Windows.Forms.PictureBox imgShowPwd;
+        private System.Windows.Forms.PictureBox imgHidePwd;
         private ns1.BunifuMetroTextbox txtLogin;
-        private ns1.BunifuMetroTextbox txtSenha;
+        private ns1.BunifuMetroTextbox txtPwd;
         private System.Windows.Forms.Label label3;
-        private System.Windows.Forms.Label lblSuperior;
+        private System.Windows.Forms.Label lblTop;
         private System.Windows.Forms.Panel panel3;
-        private System.Windows.Forms.PictureBox btnSair;
-        private System.Windows.Forms.Label lblMenssage;
+        private System.Windows.Forms.PictureBox btnClose;
+        private System.Windows.Forms.Label lblMessage;
         private System.Windows.Forms.Panel panel2;
         private System.Windows.Forms.Panel panel1;
         private System.Windows.Forms.Label label1;

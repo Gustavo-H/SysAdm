@@ -17,120 +17,120 @@ namespace SysAdm
             InitializeComponent();
             this.MouseDown += new MouseEventHandler(MouseDownFrm);
             this.MouseMove += new MouseEventHandler(MouseMoveFrm);
-            txtLogin.Text = txtSenha.Text = "admin";
+            txtLogin.Text = txtPwd.Text = "admin";
         }
 
-        int clique = 0;
+        int click = 0;
         int X = 0;
         int Y = 0;
 
-        ClsLogin login;
+        ClsLogin Login;
         Image imgBKP;
 
-        private async void validarLogin()
+        private async void CheckLogin()
         {
             await Task.Delay(100);
-            login = new ClsLogin();
-
-            login.Pwd = txtSenha.Text;
-            login.Login = txtLogin.Text;
-
-            string resultado = login.LoginValidation();
-
-            if (resultado.Length > 5)
+            Login = new ClsLogin
             {
-                falhaNoBanco(resultado, "Tentar Validar Login no Servidor");
-                lblMenssage.Visible = false;
-                btnIr.Enabled = true;
+                Pwd = txtPwd.Text,
+                Login = txtLogin.Text
+            };
+
+            string resul = Login.LoginValidation();
+
+            if (resul.Length > 5)
+            {
+                DataBaseFailure(resul, "Tentar Validar Login no Servidor");
+                lblMessage.Visible = false;
+                btnGo.Enabled = true;
             }
 
-            else if (Convert.ToBoolean(resultado))
-                loginValido();
+            else if (Convert.ToBoolean(resul))
+                ValidLogin();
 
             else
-                loginInvalido();
+                InvalidLogin();
         }
 
-        private async void loginValido()
+        private async void ValidLogin()
         {
-            lblSuperior.BackColor = Color.ForestGreen;
-            menssagem(Color.SeaGreen, "Login Feito Com Sucesso");
+            lblTop.BackColor = Color.ForestGreen;
+            MessageToUser(Color.SeaGreen, "Login Feito Com Sucesso");
             await Task.Delay(100);
             FrmMain frmMain = new FrmMain();
             FrmMain main = frmMain;
             this.Hide();
             main.ShowDialog();
-            btnIr.Enabled = true;
 
+            btnGo.Enabled = true;
             this.Show();
-            txtSenha.Text = string.Empty;
-            lblSuperior.BackColor = Color.Red;
+            txtPwd.Text = string.Empty;
+            lblTop.BackColor = Color.Red;
         }
 
-        private async void loginInvalido()
+        private async void InvalidLogin()
         {
-            lblSuperior.BackColor = Color.Red;
-            menssagem(Color.Red, "Login ou Senha Invalidos");
-            await Task.Delay(1500);
-            //lblMenssage.Visible = false;   
-            btnIr.Enabled = true;
+            lblTop.BackColor = Color.Red;
+            MessageToUser(Color.Red, "Login ou Senha Invalidos");
+            await Task.Delay(1500);              
+            btnGo.Enabled = true;
         }
 
-        private bool verificarCampos()
+        private bool CheckFields()
         {
-            bool verificar = true;
+            bool isChecked = true;
 
-            string erros = string.Empty;
+            string errors = string.Empty;
 
             if (string.IsNullOrWhiteSpace(txtLogin.Text))
             {
-                erros = "--Preencher Corretamente o Campo Prontuario\n";
-                verificar = false;
+                errors = "--Preencher Corretamente o Campo Login\n";
+                isChecked = false;
             }
 
-            if (string.IsNullOrWhiteSpace(txtSenha.Text))
+            if (string.IsNullOrWhiteSpace(txtPwd.Text))
             {
-                erros += "--Preencher Corretamente o Campo Senha\n";
-                verificar = false;
+                errors += "--Preencher Corretamente o Campo Senha\n";
+                isChecked = false;
             }
 
-            if (erros != string.Empty)
+            if (errors != string.Empty)
             {
-                if (erros.Length > 48)
-                    MessageBox.Show(erros, "Antenção Corrija Os Seguintes Erros", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                if (errors.Length > 48)
+                    MessageBox.Show(errors, "Antenção Corrija Os Seguintes Erros", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
                 else
-                    MessageBox.Show(erros, "Antenção Corrija O Seguinte Erro", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
-                btnIr.Enabled = true;
+                    MessageBox.Show(errors, "Antenção Corrija O Seguinte Erro", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                btnGo.Enabled = true;
             }
-            return verificar;
+            return isChecked;
         }
 
-        private void falhaNoBanco(string falha, string onde)  //Ao Tentar Conectar Ao Servidor
+        private void DataBaseFailure(string error, string when)
         {
-            if (MessageBox.Show("Erro " + onde + "\n\nClique Sim Para Ver a \nDescrição Completa do Erro", "Atenção", MessageBoxButtons.YesNo, MessageBoxIcon.Error).ToString().ToUpper() == "YES")
-                MessageBox.Show(falha, "Descrição Completa do Erro", MessageBoxButtons.OK);
+            if (MessageBox.Show("Erro " + when + "\n\nClique Sim Para Ver a \nDescrição Completa do Erro", "Atenção", MessageBoxButtons.YesNo, MessageBoxIcon.Error).ToString().ToUpper() == "YES")
+                MessageBox.Show(error, "Descrição Completa do Erro", MessageBoxButtons.OK);
         }
 
-        private async void cliqueBtnIr()
+        private async void BtnGoClick()
         {
-            menssagem(Color.Blue, "Validando Login . . .");
+            MessageToUser(Color.Blue, "Validando Login . . .");
 
-            if (clique > 0)
+            if (click > 0)
                 await Task.Delay(500);
 
-            validarLogin();
-            clique++;
+            CheckLogin();
+            click++;
         }
 
-        private async void menssagem(Color cor, string texto)
+        private async void MessageToUser(Color color, string text)
         {
-            lblMenssage.Text = texto;
-            lblMenssage.ForeColor = cor;
-            lblMenssage.Visible = true;
+            lblMessage.Text = text;
+            lblMessage.ForeColor = color;
+            lblMessage.Visible = true;
 
-            if (cor == Color.ForestGreen)
+            if (color == Color.ForestGreen)
             {
-                lblSuperior.BackColor = cor;
+                lblTop.BackColor = color;
                 await Task.Delay(1800);
                 this.Close();
             }
@@ -143,39 +143,39 @@ namespace SysAdm
             toolTip1.InitialDelay = 100;
             toolTip1.ReshowDelay = 500;
             toolTip1.ShowAlways = true;
-            toolTip1.SetToolTip(this.imgMostrarSenha, "Clique Para Mostar\nA Senha Digitada");
-            toolTip1.SetToolTip(this.imgNaoMostarSenha, "Clique Para Ocultar\nA Senha Digitada");
-            toolTip1.SetToolTip(this.btnSair, "Clique Para Sair");
-            toolTip1.SetToolTip(this.btnIr, "Clique Para\nValidar o Login");
+            toolTip1.SetToolTip(this.imgShowPwd, "Clique Para Mostar\nA Senha Digitada");
+            toolTip1.SetToolTip(this.imgHidePwd, "Clique Para Ocultar\nA Senha Digitada");
+            toolTip1.SetToolTip(this.btnClose, "Clique Para Sair");
+            toolTip1.SetToolTip(this.btnGo, "Clique Para\nValidar o Login");
             toolTip1.SetToolTip(this.btnInfo, "Clique Para Obter\nAjuda ou Informações");
             toolTip1.SetToolTip(this.txtLogin, "Digite Seu Prontuario Aqui");
-            toolTip1.SetToolTip(this.txtSenha, "Digite Sua Senha Aqui");
+            toolTip1.SetToolTip(this.txtPwd, "Digite Sua Senha Aqui");
         }
 
-        private void btnSair_Click(object sender, EventArgs e)
+        private void BtnClose_Click(object sender, EventArgs e)
         {
             Application.Exit();
         }
 
-        private void btnIr_Click(object sender, EventArgs e)
+        private void BtnGo_Click(object sender, EventArgs e)
         {
-            btnIr.Enabled = false;
-            if (verificarCampos())
-                cliqueBtnIr();
+            btnGo.Enabled = false;
+            if (CheckFields())
+                BtnGoClick();
         }
 
-        private void imgNaoMostarSenha_Click(object sender, EventArgs e)
+        private void ImgHidePwd_Click(object sender, EventArgs e)
         {
-            imgNaoMostarSenha.Visible = false;
-            imgMostrarSenha.Visible = true;
-            txtSenha.isPassword = true;
+            imgHidePwd.Visible = false;
+            imgShowPwd.Visible = true;
+            txtPwd.isPassword = true;
         }
 
-        private void imgMostrarSenha_Click(object sender, EventArgs e)
+        private void ImgShowPwd_Click(object sender, EventArgs e)
         {
-            imgNaoMostarSenha.Visible = true;
-            imgMostrarSenha.Visible = false;
-            txtSenha.isPassword = false;
+            imgHidePwd.Visible = true;
+            imgShowPwd.Visible = false;
+            txtPwd.isPassword = false;
         }
 
         private void MouseDownFrm(object sender, MouseEventArgs e)
@@ -192,21 +192,20 @@ namespace SysAdm
             this.Top = Y + MousePosition.Y;
         }
 
-        private void btnInfo_Click(object sender, EventArgs e)
+        private void BtnInfo_Click(object sender, EventArgs e)
         {
             MessageBox.Show("Para Logar no Sistema e necessario ter um login ja registrado\nCaso Você não tenha contate o administrador");
         }
-
-
-        private void btnSair_MouseEnter(object sender, EventArgs e)
+ 
+        private void BtnClose_MouseEnter(object sender, EventArgs e)
         {
-            imgBKP = btnSair.Image;
-            btnSair.Image = IMG_RED.Image;
+            imgBKP = btnClose.Image;
+            btnClose.Image = IMG_RED.Image;
         }
 
-        private void btnSair_MouseLeave(object sender, EventArgs e)
+        private void BtnClose_MouseLeave(object sender, EventArgs e)
         {
-            btnSair.Image = imgBKP;
+            btnClose.Image = imgBKP;
         }
     }
 }
