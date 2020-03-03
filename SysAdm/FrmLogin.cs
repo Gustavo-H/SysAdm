@@ -19,7 +19,7 @@ namespace SysAdm
             this.MouseMove += new MouseEventHandler(MouseMoveFrm);
             txtLogin.Text = txtPwd.Text = "admin";
         }
-
+                
         int click = 0;
         int X = 0;
         int Y = 0;
@@ -63,6 +63,7 @@ namespace SysAdm
             main.ShowDialog();
 
             btnGo.Enabled = true;
+            lblMessage.Visible = false;
             this.Show();
             txtPwd.Text = string.Empty;
             lblTop.BackColor = Color.Red;

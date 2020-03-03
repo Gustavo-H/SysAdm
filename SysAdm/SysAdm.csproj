@@ -46,6 +46,9 @@
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
+  <PropertyGroup>
+    <ApplicationIcon>iconfinder_Artboard_26_4362583 %281%29.ico</ApplicationIcon>
+  </PropertyGroup>
   <ItemGroup>
     <Reference Include="Bunifu_UI_v1.52">
       <HintPath>..\DLLs\Bunifu_UI_v1.52.dll</HintPath>
@@ -149,6 +152,8 @@
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
       <DependentUpon>DB_SysAdm.mdf</DependentUpon>
     </Content>
+    <Content Include="iconfinder_Artboard_26_4362583 %281%29.ico" />
+    <Content Include="iconfinder_Artboard_26_4362583.ico" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
