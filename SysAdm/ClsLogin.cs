@@ -98,7 +98,7 @@ namespace SysAdm
 
                 SqlCommand cmd = new SqlCommand("sp_Set_DataLogin", connection.Connect());
                 cmd.CommandType = CommandType.StoredProcedure;
-                cmd.Parameters.AddWithValue("@pId_Usuario", UserLogged.ID);
+                cmd.Parameters.AddWithValue("@pId", UserLogged.ID);
                 cmd.ExecuteNonQuery();
                 connection.Disconnect();
             }

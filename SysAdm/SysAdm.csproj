@@ -68,6 +68,7 @@
     <Compile Include="ClsConnection.cs" />
     <Compile Include="ClsCrud.cs" />
     <Compile Include="ClsLogin.cs" />
+    <Compile Include="ClsProduct.cs" />
     <Compile Include="ClsUser.cs" />
     <Compile Include="DB_SysAdmDataSet.Designer.cs">
       <AutoGen>True</AutoGen>

@@ -22,7 +22,7 @@ namespace SysAdm
 
         public void InsertLog()
         {
-
+                
         }
     }
 }

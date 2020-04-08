@@ -27,5 +27,10 @@ namespace SysAdm
             FrmLogin l = new FrmLogin();
             l.Show();
         }
+
+        private void panelContenedor_Paint(object sender, PaintEventArgs e)
+        {
+
+        }
     }
 }
